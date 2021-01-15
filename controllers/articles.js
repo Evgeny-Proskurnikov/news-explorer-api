@@ -11,9 +11,13 @@ module.exports.getArticles = (req, res, next) => {
 
 // создание карточки
 module.exports.createArticle = (req, res, next) => {
-  const { name, link } = req.body;
+  const {
+    keyword, title, text, date, source, link, image,
+  } = req.body;
 
-  Article.create({ name, link, owner: req.user._id })
+  Article.create({
+    keyword, title, text, date, source, link, image, owner: req.user._id,
+  })
     .then((article) => res.status(200).send(article))
     .catch(next);
 };
@@ -22,7 +26,7 @@ module.exports.createArticle = (req, res, next) => {
 module.exports.deleteArticle = (req, res, next) => {
   const { articleId } = req.params;
 
-  Article.findById(articleId)
+  Article.findById(articleId).select('+owner')
     .orFail(new NotFoundError('Карточка не найдена'))
     .then((article) => {
       if (article.owner.toString() !== req.user._id) { // свойство user добавлено при авторизации

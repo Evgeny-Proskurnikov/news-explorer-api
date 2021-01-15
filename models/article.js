@@ -44,8 +44,8 @@ const articleSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
+    select: false, // по умолчанию не будет возвращаться из базы
     required: true,
-    select: false, // по умолчанию хеш пароля пользователя не будет возвращаться из базы
   },
 });
 
