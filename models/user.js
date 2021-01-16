@@ -34,10 +34,11 @@ const userSchema = new mongoose.Schema({
 });
 
 // в схеме select: false не срабатывает, поэтому модифицируем объект ответа
-// userSchema.methods.toJSON = function () { // eslint-disable-line
-//   const obj = this.toObject();
-//   delete obj.password;
-//   return obj;
-// };
+// баг метода create в mongoose
+userSchema.methods.toJSON = function () { // eslint-disable-line
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 module.exports = mongoose.model('user', userSchema);

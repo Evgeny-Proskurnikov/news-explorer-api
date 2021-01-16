@@ -3,6 +3,7 @@
 ## Описание
 
 Серверная сторона проекта News-explorer. API разработан по принципам REST.
+http://api.nexplorer.evpro.students.nomoreparties.xyz
 
 ## Запуск проекта
 
