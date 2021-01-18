@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const npmValidator = require('validator');
+const { URL_INCORRECT } = require('../utils/constants');
 
 const articleSchema = new mongoose.Schema({
   keyword: {
@@ -26,9 +28,9 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/[a-z0-9\W\_]+#?$/i.test(v); // eslint-disable-line
+        return npmValidator.isURL(v);
       },
-      message: 'Ссылка некорректна',
+      message: URL_INCORRECT,
     },
   },
   image: {
@@ -36,9 +38,9 @@ const articleSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /^https?:\/\/[a-z0-9\W\_]+#?$/i.test(v); // eslint-disable-line
+        return npmValidator.isURL(v);
       },
-      message: 'Ссылка некорректна',
+      message: URL_INCORRECT,
     },
   },
   owner: {
@@ -48,6 +50,14 @@ const articleSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+// в схеме select: false не срабатывает, поэтому модифицируем объект ответа
+// баг метода create в mongoose
+articleSchema.methods.toJSON = function () { // eslint-disable-line
+  const obj = this.toObject();
+  delete obj.owner;
+  return obj;
+};
 
 const articleModel = mongoose.model('article', articleSchema);
 

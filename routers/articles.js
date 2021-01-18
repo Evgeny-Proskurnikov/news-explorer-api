@@ -5,6 +5,7 @@ const {
   createArticle,
   deleteArticle,
 } = require('../controllers/articles');
+const { URL_REGEXP } = require('../utils/constants');
 
 router.get('/', celebrate({
   headers: Joi.object().keys({
@@ -22,8 +23,8 @@ router.post('/', celebrate({
     text: Joi.string().required(),
     date: Joi.string().required(),
     source: Joi.string().required(),
-    link: Joi.string().required().pattern(/^https?:\/\/[a-z0-9\W\_]+#?$/i, 'url'), // eslint-disable-line
-    image: Joi.string().required().pattern(/^https?:\/\/[a-z0-9\W\_]+#?$/i, 'url'), // eslint-disable-line
+    link: Joi.string().required().pattern(URL_REGEXP, 'url'), // eslint-disable-line
+    image: Joi.string().required().pattern(URL_REGEXP, 'url'), // eslint-disable-line
   }),
 }), createArticle);
 
@@ -32,7 +33,7 @@ router.delete('/:articleId', celebrate({
     authorization: Joi.string().required(),
   }).unknown(),
   params: Joi.object().keys({
-    articleId: Joi.string().alphanum().length(24).required(),
+    articleId: Joi.string().hex().length(24).required(),
   }),
 }), deleteArticle);
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const npmValidator = require('validator');
+const { EMAIL_INCORRECT } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,20 +17,13 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return npmValidator.isEmail(v);
       },
-      message: 'Email некорректен',
+      message: EMAIL_INCORRECT,
     },
   },
   password: {
     type: String,
     required: true,
     select: false, // по умолчанию хеш пароля пользователя не будет возвращаться из базы
-    minlength: 8,
-    validate: {
-      validator(v) {
-        return /[a-z0-9]*/i.test(v);
-      },
-      message: 'Пароль некорректен',
-    },
   },
 });
 
