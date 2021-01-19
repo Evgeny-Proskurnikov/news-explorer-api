@@ -53,7 +53,7 @@ const articleSchema = new mongoose.Schema({
 
 // в схеме select: false не срабатывает, поэтому модифицируем объект ответа
 // баг метода create в mongoose
-articleSchema.methods.toJSON = function () { // eslint-disable-line
+articleSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.owner;
   return obj;

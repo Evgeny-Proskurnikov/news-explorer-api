@@ -23,8 +23,8 @@ router.post('/', celebrate({
     text: Joi.string().required(),
     date: Joi.string().required(),
     source: Joi.string().required(),
-    link: Joi.string().required().pattern(URL_REGEXP, 'url'), // eslint-disable-line
-    image: Joi.string().required().pattern(URL_REGEXP, 'url'), // eslint-disable-line
+    link: Joi.string().required().pattern(URL_REGEXP, 'url'),
+    image: Joi.string().required().pattern(URL_REGEXP, 'url'),
   }),
 }), createArticle);
 

@@ -1,4 +1,4 @@
-const URL_REGEXP = /^https?:\/\/[a-z0-9\W\_^@]+#?$/i; // eslint-disable-line
+const URL_REGEXP = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 const NOT_FOUND_USER = 'Нет пользователя с таким id';
 const UNAUTHORIZED_USER = 'Неправильные почта или пароль';
 const USER_EXISTS = 'Пользователь уже создан';
