@@ -1,40 +1,9 @@
-const { Joi, celebrate } = require('celebrate');
 const router = require('express').Router();
-const {
-  getArticles,
-  createArticle,
-  deleteArticle,
-} = require('../controllers/articles');
-const { URL_REGEXP } = require('../utils/constants');
+const { getArticles, createArticle, deleteArticle } = require('../controllers/articles');
+const { validateGetArts, validateCreateArt, validateDelArt } = require('../middlewares/routers-validater');
 
-router.get('/', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(),
-}), getArticles);
-
-router.post('/', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(),
-  body: Joi.object().keys({
-    keyword: Joi.string().required(),
-    title: Joi.string().required(),
-    text: Joi.string().required(),
-    date: Joi.string().required(),
-    source: Joi.string().required(),
-    link: Joi.string().required().pattern(URL_REGEXP, 'url'),
-    image: Joi.string().required().pattern(URL_REGEXP, 'url'),
-  }),
-}), createArticle);
-
-router.delete('/:articleId', celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().required(),
-  }).unknown(),
-  params: Joi.object().keys({
-    articleId: Joi.string().hex().length(24).required(),
-  }),
-}), deleteArticle);
+router.get('/', validateGetArts, getArticles);
+router.post('/', validateCreateArt, createArticle);
+router.delete('/:articleId', validateDelArt, deleteArticle);
 
 module.exports = router;
