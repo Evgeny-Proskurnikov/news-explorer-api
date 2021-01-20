@@ -1,5 +1,12 @@
-const { Joi, celebrate } = require('celebrate');
-const { URL_REGEXP } = require('../utils/constants');
+const { Joi, celebrate, CelebrateError } = require('celebrate');
+const validator = require('validator');
+
+const validateUrl = (v) => {
+  if (!validator.isURL(v)) {
+    throw new CelebrateError();
+  }
+  return v;
+};
 
 const validateGetArts = celebrate({
   headers: Joi.object().keys({
@@ -17,8 +24,8 @@ const validateCreateArt = celebrate({
     text: Joi.string().required(),
     date: Joi.string().required(),
     source: Joi.string().required(),
-    link: Joi.string().required().pattern(URL_REGEXP, 'url'),
-    image: Joi.string().required().pattern(URL_REGEXP, 'url'),
+    link: Joi.string().required().custom(validateUrl),
+    image: Joi.string().required().custom(validateUrl),
   }),
 });
 

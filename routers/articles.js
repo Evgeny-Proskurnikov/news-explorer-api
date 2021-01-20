@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { getArticles, createArticle, deleteArticle } = require('../controllers/articles');
-const { validateGetArts, validateCreateArt, validateDelArt } = require('../middlewares/routers-validater');
+const { validateGetArts, validateCreateArt, validateDelArt } = require('../middlewares/routers-validator');
 
 router.get('/', validateGetArts, getArticles);
 router.post('/', validateCreateArt, createArticle);
