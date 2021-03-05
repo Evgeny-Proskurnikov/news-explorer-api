@@ -3,14 +3,14 @@ const DEV_DB_HOST = 'mongodb://localhost:27017/newsdb';
 const SALT_ROUNDS = 10;
 const HOSTS = [
   'http://localhost:3000',
-  'http://www.api.nexplorer.evpro.students.nomoreparties.xyz',
-  'https://www.api.nexplorer.evpro.students.nomoreparties.xyz',
-  'http://api.nexplorer.evpro.students.nomoreparties.xyz',
-  'https://api.nexplorer.evpro.students.nomoreparties.xyz',
-  'http://www.nexplorer.evpro.students.nomoreparties.xyz',
-  'https://www.nexplorer.evpro.students.nomoreparties.xyz',
-  'http://nexplorer.evpro.students.nomoreparties.xyz',
-  'https://nexplorer.evpro.students.nomoreparties.xyz',
+  'http://www.api.newsexplorer.evpro.students.nomoredomains.rocks',
+  'https://www.api.newsexplorer.evpro.students.nomoredomains.rocks',
+  'http://api.newsexplorer.evpro.students.nomoredomains.rocks',
+  'https://api.newsexplorer.evpro.students.nomoredomains.rocks',
+  'http://www.newsexplorer.evpro.students.nomoredomains.rocks',
+  'https://www.newsexplorer.evpro.students.nomoredomains.rocks',
+  'http://newsexplorer.evpro.students.nomoredomains.rocks',
+  'https://newsexplorer.evpro.students.nomoredomains.rocks',
 ];
 
 module.exports = {
